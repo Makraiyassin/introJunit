@@ -30,16 +30,16 @@ public class Triangle {
         if(checkValidity(a,b,c)) {
             if (a == b && b == c && c == a)
                 return "equilateral";
-            if (a == b || b == c || c == b)
+            if (a == b || a == c || b == c)
                 return "isocele";
-            if (a != b && b != c && c != a)
+            if (a != b && a != c && b != c)
                 return "scalene";
         }
         return "Ceci n'est pas un triangle rectangle";
     }
 
     public boolean checkValidity(int a, int b, int c){
-        if(a*a == b*b + c*c || b*b == a*a + c*c || c*c == a*a + b*b) return true;
-        return false;
+        if(a <= 0 || b <= 0 || c <= 0) return false;
+        return a * a == b * b + c * c || b * b == a * a + c * c || c * c == a * a + b * b;
     }
 }
