@@ -8,6 +8,43 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TriangleTest {
     Triangle triangle;
     String result;
+
+    @Test
+    void testTriangleEquilateral1(){
+        // ARRANGE
+        triangle = new Triangle(3,3,3);
+
+        //ACT
+        result = triangle.getType();
+
+        //ASSERT
+        assertEquals("equilateral",result);
+    }
+
+    @Test
+    void testTriangleEquilateral2(){
+        // ARRANGE
+        triangle = new Triangle(4,4,4);
+
+        //ACT
+        result = triangle.getType();
+
+        //ASSERT
+        assertEquals("equilateral",result);
+    }
+
+    @Test
+    void testTriangleEquilateral3(){
+        // ARRANGE
+        triangle = new Triangle(5,5,5);
+
+        //ACT
+        result = triangle.getType();
+
+        //ASSERT
+        assertEquals("equilateral",result);
+    }
+
     @Test
     void testTriangleScalene1(){
         // ARRANGE
@@ -80,6 +117,41 @@ public class TriangleTest {
         assertEquals("isocele",result);
     }
 
+    @Test
+    void testTriangleInvalid1(){
+        // ARRANGE
+        triangle = new Triangle(3,3,10);
+
+        //ACT
+        result = triangle.getType();
+
+        //ASSERT
+        assertEquals("Ceci n'est pas un triangle",result);
+    }
+
+    @Test
+    void testTriangleInvalid2(){
+        // ARRANGE
+        triangle = new Triangle(0,3,10);
+
+        //ACT
+        result = triangle.getType();
+
+        //ASSERT
+        assertEquals("Ceci n'est pas un triangle",result);
+    }
+
+    @Test
+    void testTriangleInvalid3(){
+        // ARRANGE
+        triangle = new Triangle(-3,9,4);
+
+        //ACT
+        result = triangle.getType();
+
+        //ASSERT
+        assertEquals("Ceci n'est pas un triangle",result);
+    }
 }
 
 

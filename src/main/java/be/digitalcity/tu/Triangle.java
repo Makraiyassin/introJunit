@@ -1,45 +1,30 @@
 package be.digitalcity.tu;
 
 public class Triangle {
-    private int a;
-    private int b;
-    private int c;
-    private String type;
+    private final int a;
+    private final int b;
+    private final int c;
 
     public Triangle(int a, int coteB, int coteC) {
         this.a = a;
         this.b = coteB;
         this.c = coteC;
-        this.type = getType();
 
-    }
-
-    public int getA() {
-        return a;
-    }
-
-    public int getB() {
-        return b;
-    }
-
-    public int getC() {
-        return c;
     }
 
     public String getType() {
         if(checkValidity(a,b,c)) {
-            if (a == b && b == c && c == a)
-                return "equilateral";
-            if (a == b || a == c || b == c)
-                return "isocele";
+            if (a == b && a == c && b == c) return "equilateral";
+            if (a == b && a+b > c) return "isocele";
+            if (a == c && a+c > b) return "isocele";
+            if (b == c && b+c > a) return "isocele";
             if (a != b && a != c && b != c)
-                return "scalene";
+                if ( a + b >= c || a + c >= b || b + c >=  a ) return "scalene";
         }
-        return "Ceci n'est pas un triangle rectangle";
+        return "Ceci n'est pas un triangle";
     }
 
     public boolean checkValidity(int a, int b, int c){
-        if(a <= 0 || b <= 0 || c <= 0) return false;
-        return a * a == b * b + c * c || b * b == a * a + c * c || c * c == a * a + b * b;
+        return a > 0 && b > 0 && c > 0;
     }
 }
