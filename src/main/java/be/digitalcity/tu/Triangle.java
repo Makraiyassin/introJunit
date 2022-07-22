@@ -12,19 +12,21 @@ public class Triangle {
 
     }
 
-    public String getType() {
+    public String getType() throws TriangleExeption {
         if(checkValidity(a,b,c)) {
             if (a == b && a == c && b == c) return "equilateral";
             if (a == b && a+b > c) return "isocele";
             if (a == c && a+c > b) return "isocele";
             if (b == c && b+c > a) return "isocele";
-            if (a != b && a != c && b != c)
-                if ( a + b >= c || a + c >= b || b + c >=  a ) return "scalene";
+            if (a != b && a != c && b != c) return "scalene";
         }
-        return "Ceci n'est pas un triangle";
+       throw new TriangleExeption("Ceci n'est pas un triangle");
+
     }
 
     public boolean checkValidity(int a, int b, int c){
+        if( a >= b + c || b >= a + c  || c >= a + b ) return false;
+
         return a > 0 && b > 0 && c > 0;
     }
 }

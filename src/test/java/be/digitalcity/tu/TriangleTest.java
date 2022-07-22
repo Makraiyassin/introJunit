@@ -10,7 +10,7 @@ public class TriangleTest {
     String result;
 
     @Test
-    void testTriangleEquilateral1(){
+    void testTriangleEquilateral1() throws TriangleExeption {
         // ARRANGE
         triangle = new Triangle(3,3,3);
 
@@ -22,7 +22,7 @@ public class TriangleTest {
     }
 
     @Test
-    void testTriangleEquilateral2(){
+    void testTriangleEquilateral2() throws TriangleExeption {
         // ARRANGE
         triangle = new Triangle(4,4,4);
 
@@ -34,7 +34,7 @@ public class TriangleTest {
     }
 
     @Test
-    void testTriangleEquilateral3(){
+    void testTriangleEquilateral3() throws TriangleExeption {
         // ARRANGE
         triangle = new Triangle(5,5,5);
 
@@ -46,7 +46,7 @@ public class TriangleTest {
     }
 
     @Test
-    void testTriangleScalene1(){
+    void testTriangleScalene1() throws TriangleExeption {
         // ARRANGE
         triangle = new Triangle(1,2,5);
 
@@ -58,7 +58,7 @@ public class TriangleTest {
     }
 
     @Test
-    void testTriangleScalene2(){
+    void testTriangleScalene2() throws TriangleExeption {
         // ARRANGE
         triangle = new Triangle(10,2,12);
 
@@ -70,7 +70,7 @@ public class TriangleTest {
     }
 
     @Test
-    void testTriangleScalene3(){
+    void testTriangleScalene3() throws TriangleExeption {
         // ARRANGE
         triangle = new Triangle(3,4,5);
 
@@ -82,9 +82,9 @@ public class TriangleTest {
     }
 
     @Test
-    void testTriangleIsocele1(){
+    void testTriangleIsocele1() throws TriangleExeption {
         // ARRANGE
-        triangle = new Triangle(2,2,5);
+        triangle = new Triangle(5,5,3);
 
         //ACT
         result = triangle.getType();
@@ -94,7 +94,7 @@ public class TriangleTest {
     }
 
     @Test
-    void testTriangleIsocele2(){
+    void testTriangleIsocele2() throws TriangleExeption {
         // ARRANGE
         triangle = new Triangle(3,3,4);
 
@@ -106,7 +106,7 @@ public class TriangleTest {
     }
 
     @Test
-    void testTriangleIsocele3(){
+    void testTriangleIsocele3() throws TriangleExeption {
         // ARRANGE
         triangle = new Triangle(6,3,6);
 
@@ -118,39 +118,39 @@ public class TriangleTest {
     }
 
     @Test
-    void testTriangleInvalid1(){
+    void testTriangleInvalid1() throws TriangleExeption {
         // ARRANGE
         triangle = new Triangle(3,3,10);
 
-        //ACT
-        result = triangle.getType();
-
         //ASSERT
-        assertEquals("Ceci n'est pas un triangle",result);
+        TriangleExeption exception = assertThrows(TriangleExeption.class, () -> {
+            result = triangle.getType();
+        });
+        assertEquals("Ceci n'est pas un triangle",exception.getMessage());
     }
 
     @Test
-    void testTriangleInvalid2(){
+    void testTriangleInvalid2() throws TriangleExeption {
         // ARRANGE
         triangle = new Triangle(0,3,10);
 
-        //ACT
-        result = triangle.getType();
-
         //ASSERT
-        assertEquals("Ceci n'est pas un triangle",result);
+        TriangleExeption exception = assertThrows(TriangleExeption.class, () -> {
+            result = triangle.getType();
+        });
+        assertEquals("Ceci n'est pas un triangle",exception.getMessage());
     }
 
     @Test
-    void testTriangleInvalid3(){
+    void testTriangleInvalid3() throws TriangleExeption {
         // ARRANGE
         triangle = new Triangle(-3,9,4);
 
-        //ACT
-        result = triangle.getType();
-
         //ASSERT
-        assertEquals("Ceci n'est pas un triangle",result);
+        TriangleExeption exception = assertThrows(TriangleExeption.class, () -> {
+            result = triangle.getType();
+        });
+        assertEquals("Ceci n'est pas un triangle",exception.getMessage());
     }
 }
 
