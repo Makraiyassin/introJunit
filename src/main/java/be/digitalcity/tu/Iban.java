@@ -4,7 +4,7 @@ public class Iban {
     String iban;
 
     public Iban(String iban) {
-        this.iban = iban;
+        this.iban = iban.replaceAll("[-+.\\s/*^:,]","");
     }
 
     public Boolean isValide() throws IbanExeption {
