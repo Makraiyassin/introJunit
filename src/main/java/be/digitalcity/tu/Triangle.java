@@ -13,20 +13,13 @@ public class Triangle {
     }
 
     public String getType() throws TriangleExeption {
-        if(checkValidity(a,b,c)) {
-            if (a == b && a == c && b == c) return "equilateral";
-            if (a == b && a+b > c) return "isocele";
-            if (a == c && a+c > b) return "isocele";
-            if (b == c && b+c > a) return "isocele";
-            if (a != b && a != c && b != c) return "scalene";
-        }
-       throw new TriangleExeption("Ceci n'est pas un triangle");
-
+        if( a <= 0 || b <= 0 || c <= 0 )
+            throw new TriangleExeption("Ceci n'est pas un triangle (les 3 cotes doivent etre superieur a 0)");
+        if( a >= b + c || b >= a + c  || c >= a + b )
+            throw new TriangleExeption("Ceci n'est pas un triangle (le plus grand cotes ne doit pas etre plus grand ou egale a la somme des deux autre cotes)");
+        if (a == b && a == c) return "equilateral";
+        if (a == b || a == c || b == c ) return "isocele";
+        return "scalene";
     }
 
-    public boolean checkValidity(int a, int b, int c){
-        if( a >= b + c || b >= a + c  || c >= a + b ) return false;
-
-        return a > 0 && b > 0 && c > 0;
-    }
 }

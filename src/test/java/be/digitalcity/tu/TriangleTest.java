@@ -1,7 +1,11 @@
 package be.digitalcity.tu;
 
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+
+import java.util.Random;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -48,7 +52,7 @@ public class TriangleTest {
     @Test
     void testTriangleScalene1() throws TriangleExeption {
         // ARRANGE
-        triangle = new Triangle(1,2,5);
+        triangle = new Triangle(2,3,4);
 
         //ACT
         result = triangle.getType();
@@ -60,7 +64,7 @@ public class TriangleTest {
     @Test
     void testTriangleScalene2() throws TriangleExeption {
         // ARRANGE
-        triangle = new Triangle(10,2,12);
+        triangle = new Triangle(10,3,12);
 
         //ACT
         result = triangle.getType();
@@ -126,7 +130,7 @@ public class TriangleTest {
         TriangleExeption exception = assertThrows(TriangleExeption.class, () -> {
             result = triangle.getType();
         });
-        assertEquals("Ceci n'est pas un triangle",exception.getMessage());
+        assertEquals("Ceci n'est pas un triangle (le plus grand cotes ne doit pas etre plus grand ou egale a la somme des deux autre cotes)",exception.getMessage());
     }
 
     @Test
@@ -138,7 +142,7 @@ public class TriangleTest {
         TriangleExeption exception = assertThrows(TriangleExeption.class, () -> {
             result = triangle.getType();
         });
-        assertEquals("Ceci n'est pas un triangle",exception.getMessage());
+        assertEquals("Ceci n'est pas un triangle (les 3 cotes doivent etre superieur a 0)",exception.getMessage());
     }
 
     @Test
@@ -150,7 +154,29 @@ public class TriangleTest {
         TriangleExeption exception = assertThrows(TriangleExeption.class, () -> {
             result = triangle.getType();
         });
-        assertEquals("Ceci n'est pas un triangle",exception.getMessage());
+        assertEquals("Ceci n'est pas un triangle (les 3 cotes doivent etre superieur a 0)",exception.getMessage());
+    }
+
+
+    @RepeatedTest(value = 1000)
+    void testTriangleRandom() throws TriangleExeption {
+        Random rnd = new Random();
+        // ARRANGE
+        triangle = new Triangle(rnd.nextInt(10),rnd.nextInt(10), rnd.nextInt(10));
+
+        //ASSERT
+        TriangleExeption exception = assertThrows(TriangleExeption.class, () -> {
+            result = triangle.getType();
+        });
+        assertEquals("Ceci n'est pas un triangle (les 3 cotes doivent etre superieur a 0)",exception.getMessage());
+//        assertEquals("Ceci n'est pas un triangle (le plus grand cotes ne doit pas etre plus grand ou egale a la somme des deux autre cotes)",exception.getMessage());
+
+//        assertEquals("equilateral",triangle.getType());
+
+//        assertEquals("isocele",triangle.getType());
+
+//        assertEquals("scalene",triangle.getType());
+
     }
 }
 
