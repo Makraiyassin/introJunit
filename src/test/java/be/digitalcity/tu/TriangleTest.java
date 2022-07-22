@@ -127,9 +127,7 @@ public class TriangleTest {
         triangle = new Triangle(3,3,10);
 
         //ASSERT
-        TriangleExeption exception = assertThrows(TriangleExeption.class, () -> {
-            result = triangle.getType();
-        });
+        TriangleExeption exception = assertThrows(TriangleExeption.class, () -> triangle.getType() );
         assertEquals("Ceci n'est pas un triangle (le plus grand cotes ne doit pas etre plus grand ou egale a la somme des deux autre cotes)",exception.getMessage());
     }
 
@@ -139,9 +137,7 @@ public class TriangleTest {
         triangle = new Triangle(0,3,10);
 
         //ASSERT
-        TriangleExeption exception = assertThrows(TriangleExeption.class, () -> {
-            result = triangle.getType();
-        });
+        TriangleExeption exception = assertThrows(TriangleExeption.class, triangle::getType );
         assertEquals("Ceci n'est pas un triangle (les 3 cotes doivent etre superieur a 0)",exception.getMessage());
     }
 
@@ -158,17 +154,17 @@ public class TriangleTest {
     }
 
 
-    @RepeatedTest(value = 1000)
+    @RepeatedTest(value = 100)
     void testTriangleRandom() throws TriangleExeption {
         Random rnd = new Random();
         // ARRANGE
         triangle = new Triangle(rnd.nextInt(10),rnd.nextInt(10), rnd.nextInt(10));
 
         //ASSERT
-        TriangleExeption exception = assertThrows(TriangleExeption.class, () -> {
-            result = triangle.getType();
-        });
-        assertEquals("Ceci n'est pas un triangle (les 3 cotes doivent etre superieur a 0)",exception.getMessage());
+//        TriangleExeption exception = assertThrows(TriangleExeption.class, () -> {
+//            result = triangle.getType();
+//        });
+//        assertEquals("Ceci n'est pas un triangle (les 3 cotes doivent etre superieur a 0)",exception.getMessage());
 //        assertEquals("Ceci n'est pas un triangle (le plus grand cotes ne doit pas etre plus grand ou egale a la somme des deux autre cotes)",exception.getMessage());
 
 //        assertEquals("equilateral",triangle.getType());
@@ -177,6 +173,7 @@ public class TriangleTest {
 
 //        assertEquals("scalene",triangle.getType());
 
+            assertDoesNotThrow(triangle::getType);  //test combien de fois on obtient un triangle valide
     }
 }
 
