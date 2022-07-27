@@ -151,6 +151,19 @@ public class Main {
         System.out.println(listString2.getClass().getName());
         System.out.println(new ArrayList<>(Arrays.asList(1,2,3)).add(4)); //true
 //        System.out.println(Arrays.asList(1,2,3).add(4)); //Exception because it isn't a true ArrayList => java.util.Arrays$ArrayList
+
+        System.out.println("===== LinkedList =====");
+        LinkedList<String> orders = new LinkedList<>();
+        orders.add("order 1");
+        orders.add("order 2");
+        orders.add("order 3");
+        System.out.println(orders);
+        orders.addFirst("order 4");
+        orders.addLast("order 5");
+        System.out.println(orders);
+        orders.removeFirst();
+        orders.removeLast();
+        System.out.println(orders);
     }
     public static void someMethode(int... nums){
         System.out.println(Arrays.toString(nums));
