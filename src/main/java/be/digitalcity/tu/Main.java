@@ -119,8 +119,22 @@ public class Main {
             }
         }
 
+        System.out.println("======== chapter \"List/ArrayList\" ========");
+//        List<String> listString = new ArrayList<>(Arrays.asList("hello","world","!"));
+        List<String> listString = new ArrayList<>();
+        listString.add("world");
+        listString.add(1,"!");
+        listString.add(0,"hello");
+        listString.add(listString.size(),"?");
+        System.out.println(listString.toString());
 
 
+        Object[] arrayString = listString.toArray();
+        System.out.println(Arrays.toString(arrayString));
+        List listString2 = Arrays.asList(arrayString);
+        System.out.println(listString2.getClass().getName());
+        System.out.println(new ArrayList<>(Arrays.asList(1,2,3)).add(4)); //true
+//        System.out.println(Arrays.asList(1,2,3).add(4)); //Exception because it isn't a true ArrayList => java.util.Arrays$ArrayList
     }
     public static void someMethode(int... nums){
         System.out.println(Arrays.toString(nums));
