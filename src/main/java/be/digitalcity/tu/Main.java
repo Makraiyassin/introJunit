@@ -6,15 +6,31 @@ import java.util.*;
 
 public class Main {
     public static void main(String [] args) {
+
         System.out.println("========== regex ==========");
         System.out.println("BE69-  8601-0677  -75|78".replaceAll("[\\s-|]", ""));
+
+        System.out.println("========== DateTime ... ==========");
+        DateTimeFormatter tzFormat = DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a");
+        LocalDateTime dateofFlight = LocalDateTime.of(2015, Month.AUGUST, 30, 15, 30);
+        ZoneId ziDeparture = ZoneId.of("America/Chicago");
+        ZonedDateTime dtDeparture =  ZonedDateTime.of(dateofFlight, ziDeparture);
+        String dateDisplay1 = dtDeparture.format(tzFormat);
+        System.out.printf("DEPARTURE: %s (%s)\n", dateDisplay1, ziDeparture);
+        ZoneId ziArrival = ZoneId.of("Asia/Tokyo");
+        ZonedDateTime dtArrival = dtDeparture.withZoneSameInstant(ziArrival).plusMinutes(1140);
+        String dateDisplay2 = dtArrival.format(tzFormat);
+        System.out.printf("ARRIVAL: %s (%s)",dateDisplay2, ziArrival);
+
         System.out.println("======== var ============");
         var variable2 = Arrays.asList(1,2,3)  ;
         System.out.println(variable2.toString());
+
         System.out.println("========= int... nums ===========");
         int[] array = {1,2,3,4};
         someMethode(array);
         someMethode(1,2,3,4);
+
         System.out.println("========== String pool ==========");
         String  str = "hello world!";
         String str2 = "hello world!";
