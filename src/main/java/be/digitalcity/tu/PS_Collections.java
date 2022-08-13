@@ -115,7 +115,7 @@ public class PS_Collections {
         Collections.sort(stringList);
         System.out.println(stringList);
 
-        System.out.println("\n===== comparateur en implematant comporable<T> dans la class mountain(ici en croissant)=====");
+        System.out.println("\n===== comparateur en implematant comparable<T> dans la class mountain(ici en croissant)=====");
 
         List<Mountain> mountains = new ArrayList<>(List.of(
                 new Mountain("Everest", 8848),
