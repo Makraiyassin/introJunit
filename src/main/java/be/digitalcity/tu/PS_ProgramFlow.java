@@ -2,7 +2,7 @@ package be.digitalcity.tu;
 
 import java.util.Scanner;
 
-public class PS_ProramFlow {
+public class PS_ProgramFlow {
 
     public static void main(String[] args) {
 
