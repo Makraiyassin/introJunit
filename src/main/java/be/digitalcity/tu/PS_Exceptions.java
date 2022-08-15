@@ -135,6 +135,17 @@ public class PS_Exceptions {
         }
 
 
+        System.out.println("========== throws checked exception =========");
+        Person person = new Person();
+
+        try {
+            person.setAge(10);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("========== throws unchecked exception =========");
+        person.setAge2(0);
 
     }
 
@@ -144,6 +155,45 @@ public class PS_Exceptions {
 
     private static void doThis() throws IllegalArgumentException {
         throw new IllegalArgumentException();
+    }
+
+    public static class InitErrorExample {
+
+        public static void main(String[] args) {
+            System.out.println("========== ExceptionInItializerError =========");
+        }
+
+        // cause 1
+        static int n = 2 / 0;
+
+        static {
+            // cause 2
+            int n = 1;
+            if (n < 2) throw new IllegalArgumentException();
+        }
+    }
+
+    public static class Person{
+        int age = 0;
+
+        void setAge(int age) throws IOException { //obligatoire d'ajouter l'exception à la signature de methode ou try/catch
+            this.age = age;
+            throw new IOException();
+        }
+        void setAge2(int age){  //pas obligatoire  d'ajouter l'exception à la signature de methode
+            if (age<=0) throw new IllegalArgumentException() ;
+            this.age = age;
+        }
+
+        //à part les RunTimeException, toutes les exception sont checked et doivent donc soit etre gerer soit ajouter à la signature de la methode
+        void setAge3(int age)  {
+            this.age = age;
+            try {
+                throw new Exception();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }
