@@ -1,5 +1,7 @@
 package be.digitalcity.tu;
 
+import java.util.Scanner;
+
 public class PS_ProramFlow {
 
     public static void main(String[] args) {
@@ -79,9 +81,41 @@ public class PS_ProramFlow {
                 System.out.println("Subtraction no allowed");
                 break;
         }
-        System.out.println("========= subtilité au sujet de ..... ==========");
 
 
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("entrez un charactere aux choix: ");
+//        switch(sc.nextLine()) {
+//            case "+":
+//                System.out.println("Positive");
+//                break;
+//            case "-":
+//                System.out.println("Negative");
+//                break;
+//            default:
+//                System.out.println("Sign not recognized");
+//        }
+
+        System.out.println("========= subtilité au sujet de for i ==========");
+        for (int i = 0,j=10; i < 10; i++,j--) {
+            System.out.println(i+" vs "+j);
+        }
+
+
+        int i = 1;
+
+        for(;i<10;i++){
+            System.out.println(i);
+        }
+
+        int j =10;
+
+        for(;;i--,j++){
+            System.out.println(i);
+            if(i==0) break;
+        }
+        System.out.println(j);//20
     }
 
 }
