@@ -7,7 +7,7 @@ import java.io.*;
 public class PS_Exceptions {
 
     public static void main(String[] args) {
-        System.out.println("========= systeme.exit ==========");
+//        System.out.println("========= systeme.exit ==========");
 //        try {
 //            System.exit(0); // veut dire d'arrêter l'exécution du programme
 //        }
@@ -146,6 +146,25 @@ public class PS_Exceptions {
 
         System.out.println("========== throws unchecked exception =========");
         person.setAge2(0);
+
+        System.out.println("========== example in course ps ============");
+
+        try{
+            //do stuff
+        }
+        catch (IllegalArgumentException e){
+            //handle
+        }
+//        catch (NumberFormatException e){ // all ready caught because subclass of illegalArgumentExceeption
+//            //handle
+//        }
+
+        try {
+            throw new IOException();
+//            System.out.println("something"); // erreur compilation  car ce cide n'est jamais lu
+        }catch (IOException e){
+            //handle
+        }
 
     }
 
