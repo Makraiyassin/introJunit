@@ -1,4 +1,4 @@
-package be.digitalcity.tu;
+package be.digitalcity.tu.pluralSightCourses;
 
 import jdk.swing.interop.SwingInterOpUtils;
 

@@ -1,4 +1,4 @@
-package be.digitalcity.tu;
+package be.digitalcity.tu.pluralSightCourses;
 
 import org.w3c.dom.ls.LSOutput;
 
@@ -76,8 +76,8 @@ public class PS_Exceptions {
 
         String Mastring = "ma string";
         try (
-                FileInputStream in = new FileInputStream("src/main/java/be/digitalcity/tu/testFileReader.txt");
-                FileOutputStream out = new FileOutputStream("src/main/java/be/digitalcity/tu/copyOfTestFileReader.txt")
+                FileInputStream in = new FileInputStream("src/main/java/be/digitalcity/tu/pluralSightCourses/testFileReader.txt");
+                FileOutputStream out = new FileOutputStream("src/main/java/be/digitalcity/tu/pluralSightCourses/copyOfTestFileReader.txt")
         ) {
             out.write(in.readAllBytes());
         } catch (FileNotFoundException e) {

@@ -1,7 +1,6 @@
-package be.digitalcity.tu;
+package be.digitalcity.tu.pluralSightCourses;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class PS_Generics<T>{
 
