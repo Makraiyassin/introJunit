@@ -1,6 +1,6 @@
 package be.digitalcity.tu.pluralSightCourses.PS_OOP;
 
-@FunctionalInterface
+@FunctionalInterface // Pas obligatoire, fonctionne sans ...
 public interface Meteo {
     void temperature(int x);
 
