@@ -9,6 +9,7 @@ import java.math.BigInteger;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 import java.util.stream.Stream;
 
 public class PS_StreamLambda {
@@ -130,6 +131,7 @@ public class PS_StreamLambda {
                 .reduce(BigDecimal::add); //.reduce((result5, element) -> result5.add(element));
 
         System.out.println(opt);
+        opt.ifPresent(tot -> System.out.println("total = "+tot));
         System.out.println();
 
         BigDecimal total = productList.stream()
@@ -185,5 +187,47 @@ public class PS_StreamLambda {
                                 )
                         );
         System.out.println(productNamesByCategory);
+
+        System.out.println();
+        System.out.println("====== partitioningBy =========");
+        Map<Boolean, List<Product>> partitionedProducts = productList.stream()
+                        .collect(
+                                Collectors.partitioningBy(
+                                        product -> product.getPrice().compareTo(new BigDecimal("5")) < 0
+                                )
+                        );
+        System.out.println(partitionedProducts);
+        System.out.println();
+        System.out.println("Cheap products: ");
+        partitionedProducts.get(true).forEach(System.out::println);
+        System.out.println("Expensive products: ");
+        partitionedProducts.get(false).forEach(System.out::println);
+        System.out.println();
+
+        Map<Boolean, List<Product>> exampleGroupeByWithPartitioningBy = productList.stream()
+                .collect(
+                        Collectors.partitioningBy(
+                                product -> product.getCategory().equals(Category.OFFICE)
+                        )
+                );
+        System.out.println(exampleGroupeByWithPartitioningBy.get(true));
+
+        System.out.println();
+        System.out.println("====== Specialized Streams =========");
+
+        DoubleStream prices = productList.stream()
+                .mapToDouble(product -> product.getPrice().doubleValue());
+        prices.forEach(System.out::println);
+//        System.out.println(prices.sum());
+//        System.out.println(prices.average());
+
+        System.out.println("====== statistics =========");
+
+        DoubleSummaryStatistics statistics = productList.stream()
+                .mapToDouble(product ->product.getPrice().doubleValue())
+                .summaryStatistics();
+
+        System.out.println(statistics);
+
     }
 }
