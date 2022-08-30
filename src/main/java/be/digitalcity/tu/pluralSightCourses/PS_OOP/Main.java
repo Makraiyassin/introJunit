@@ -14,7 +14,14 @@ public class Main {
 
         System.out.println();
         System.out.println("===============Interface Functionnel =========");
-        Meteo meteo = Meteo::anonce; // (x)->Meteo.anonce(x);
+//        Meteo meteo =   Meteo::anonce; // x->Meteo.anonce(x);
+        Meteo meteo = new Meteo() {
+            @Override
+            public void temperature(int x) {
+                this.anonce(x);
+            }
+        };
+
         meteo.temperature(10);
 
         System.out.println();
