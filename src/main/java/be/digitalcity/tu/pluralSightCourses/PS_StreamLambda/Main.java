@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 import java.util.stream.Stream;
 
-public class PS_StreamLambda {
+public class Main {
     public static void main(String[] args) {
 
         System.out.println("============= lambda & Anonymous class=============");
