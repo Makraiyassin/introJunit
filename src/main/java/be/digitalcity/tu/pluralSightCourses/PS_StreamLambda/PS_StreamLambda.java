@@ -1,4 +1,4 @@
-package be.digitalcity.tu.pluralSightCourses;
+package be.digitalcity.tu.pluralSightCourses.PS_StreamLambda;
 
 import be.digitalcity.tu.pluralSightCourses.PS_OOP.Category;
 import be.digitalcity.tu.pluralSightCourses.PS_OOP.Data;
