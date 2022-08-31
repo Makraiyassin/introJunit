@@ -30,6 +30,8 @@ public class PS_StreamLambda {
         sayHello.run();
         sayHello2.run();
 
+        List<Product> productList= Data.getProducts();
+
         System.out.println("------------------------------------------------");
         ArrayList<String> products = new ArrayList<>(Arrays.asList("chaussure","pull","pull","pantalon"));
         System.out.println("====== STREAM =========");
@@ -55,16 +57,16 @@ public class PS_StreamLambda {
         System.out.println();
         System.out.println("====== map =========");
         System.out.println("(Function : T => R)");
-        products.stream()
-                .map(product -> product.length()+100)
+        productList.stream()
+                .map(Product::getName)
                 .forEach(System.out::println);
 
         System.out.println();
         System.out.println("====== flatmap =========");
         System.out.println("(Function : T => R)");
         Pattern spaces = Pattern.compile("\\s+");
-        products.stream()
-                .flatMap(product -> spaces.splitAsStream(product.toUpperCase()))
+        productList.stream()
+                .flatMap(product -> spaces.splitAsStream(product.getName()))
                 .forEach(System.out::println);
 
         System.out.println();
@@ -85,10 +87,22 @@ public class PS_StreamLambda {
         System.out.println(result2);
 
         System.out.println("====== collect/ toList=========");
-        List<String> result3 = products.stream()
-                .filter(item -> item.contains("u"))
-                .toList();
-        System.out.println(result3);
+        List<String> foodProductNames = productList.stream()
+                .filter(p -> p.getCategory()==Category.FOOD)
+                .map(Product::getName)
+                .collect(Collectors.toList());
+//                .toList();
+
+        System.out.println(foodProductNames);
+
+        System.out.println("====== collect/ joining=========");
+        String categories = productList.stream()
+                .map(Product::getCategory)
+                .distinct()
+                .map(category->category.name())
+                .collect(Collectors.joining(" | "));
+        System.out.println(categories);
+
         System.out.println("====== distinct ========");
         List<String> result4 = products.stream()
                 .filter(item -> item.contains("u"))
@@ -122,7 +136,7 @@ public class PS_StreamLambda {
         Stream<String> stream = builder.build();
         stream.forEach(System.out::println);
 
-        List<Product> productList= Data.getProducts();
+
         System.out.println();
         System.out.println("====== reduce details =========");
         System.out.println("(binaryOperator : T, T => T)");
