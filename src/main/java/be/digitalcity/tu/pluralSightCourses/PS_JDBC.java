@@ -1,6 +1,7 @@
 package be.digitalcity.tu.pluralSightCourses;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 public class PS_JDBC {
     public static void main(String[] args) throws SQLException {
@@ -37,11 +38,30 @@ public class PS_JDBC {
 //            simpleInsertWithExecuteUpdate(conn);
 //            Thread.sleep(1000);
 //            simpleUpdateWithExecuteUpdate(conn);
+
+            System.out.println("=============== execute ===================");
+
             Thread.sleep(1000);
-            simpleDeleteWithExecuteUpdate(conn);
+            simpleDeleteWithExecute(conn);
 
             System.out.println("=============== PrepareStatement (?) ===================");
             insertMutlipleValues(conn);
+
+
+            System.out.println("=============== GetObject ===================");
+            useGetObject(conn);
+
+            System.out.println("=============== insert Null ===================");
+            insertAct(conn,"hello",null);
+
+            System.out.println("=============== CallableStatement ===================");
+            simpleCallableStatement(conn);
+            System.out.println("-----------------------");
+            callableStatement(
+                    conn,
+                    LocalDate.of(2022,11,5)
+                    ,LocalDate.of(2022,11,8)
+            );
 
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -66,16 +86,12 @@ public class PS_JDBC {
 
     }
 
-    private static void simpleDeleteWithExecuteUpdate(Connection conn) throws SQLException {
-//        String sql = "delete from venues where Id = 5";
+    private static void simpleDeleteWithExecute(Connection conn) throws SQLException {
+
         String sql = "delete from venues where Name = 'The House Next Door'";
         var stmt = conn.prepareStatement(sql);
-//        int result = stmt.executeUpdate();
-//        if(result > 0)
-//            System.out.println("delete in the database");
-
-        System.out.println("=============== execute ===================");
         boolean result = stmt.execute();
+
         if(!result) {
             int count = stmt.getUpdateCount();
             if(count  > 0)
@@ -83,7 +99,7 @@ public class PS_JDBC {
             else
                 System.out.println("No update");
         } else {
-            System.out.println("Result was not a count");
+            System.out.println("Result was not a count"); // ???
         }
     }
 
@@ -101,5 +117,75 @@ public class PS_JDBC {
             System.out.println("Update the database");
     }
 
+    private static void useGetObject(Connection conn) throws SQLException {
+        String sql = "select capacity, name from venues where name like ?";
+        var stmt = conn.prepareStatement(sql);
+        stmt.setString(1, "%the%");
+        ResultSet rs = stmt.executeQuery();
+        String name = "";
+        int capacity = 0;
+        while(rs.next()) {
+            Object nameValue = rs.getObject("name");
+            Object capacityValue = rs.getObject("capacity");
+
+            if(capacityValue instanceof Integer) capacity = (int)capacityValue;
+            if(nameValue instanceof String) name = (String)nameValue;
+            System.out.println(name + " has capacity " + capacity);
+
+            System.out.println("---- meme resultats -----");
+            System.out.println(nameValue + " has capacity " + capacityValue);
+            System.out.println("---------------------------");
+        }
+    }
+
+    private static void insertAct(Connection conn, String name, String recordLabel) throws SQLException{
+
+        var sql = "insert into Acts (name, recordlabel) values(?, ?)";
+        try(PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            System.out.println("------- update db avec une valeur null --------");
+
+            ps.setString(1, name);
+            if(recordLabel != null)
+                ps.setString(2, recordLabel);
+            else
+                ps.setNull(2, Types.CHAR);
+            ps.executeUpdate();
+
+            System.out.println("------- meme result--------");
+
+            ps.setString(1,"hello2");
+            ps.setString(2,recordLabel);
+            // apparament fonctionne meme avec setString et sans devoir verifier
+
+            ps.executeUpdate();
+        }
+    }
+
+    private static void simpleCallableStatement(Connection conn) throws SQLException{
+        try (CallableStatement cs = conn.prepareCall("{call GetActs2}")){ // Accolade pas necessaire ...?
+            ResultSet rs = cs.executeQuery();
+            while(rs.next()) {
+                System.out.print(rs.getString(2)+" : "+rs.getString(3)+"\n");
+            }
+        }
+    }
+
+    private static void callableStatement(Connection conn, LocalDate startDate, LocalDate endDate) throws SQLException{
+        try (CallableStatement cs = conn.prepareCall("call GigReport(?,?)")){
+
+//            cs.setDate("startdate", Date.valueOf(startDate));
+            // "int" ou "string" peuvent être utiliser ici
+            cs.setDate(1, Date.valueOf(startDate));
+
+            cs.setDate("enddate", Date.valueOf(endDate));
+
+            ResultSet rs = cs.executeQuery();
+
+            while(rs.next()) {
+                System.out.printf("date: %s, act: %s, ticketssold: %s \n",rs.getDate(1),rs.getString(2),rs.getInt(5));
+            }
+        }
+    }
 
 }
