@@ -1,4 +1,4 @@
-package be.digitalcity.tu.pluralSightCourses;
+package be.digitalcity.tu.pluralSightCourses.PS_Exceptions;
 
 import org.w3c.dom.ls.LSOutput;
 
@@ -37,7 +37,7 @@ public class PS_Exceptions {
 
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader("src/main/java/be/digitalcity/tu/testFileReader.txt"));
+            br = new BufferedReader(new FileReader("src/main/java/be/digitalcity/tu/pluralSightCourses/PS_Exceptions/testFileReader.txt"));
             String line;
             while ((line = br.readLine()) != null) {
                 System.out.println(line);
@@ -60,7 +60,7 @@ public class PS_Exceptions {
         System.out.println("============= close with try with ressource ==============");
 
         try (
-                BufferedReader br2 = new BufferedReader(new FileReader("src/main/java/be/digitalcity/tu/testFileReader.txt"));
+                BufferedReader br2 = new BufferedReader(new FileReader("src/main/java/be/digitalcity/tu/pluralSightCourses/PS_Exceptions/testFileReader.txt"));
         ) {
             String line;
             while ((line = br2.readLine()) != null) {
@@ -76,8 +76,8 @@ public class PS_Exceptions {
 
         String Mastring = "ma string";
         try (
-                FileInputStream in = new FileInputStream("src/main/java/be/digitalcity/tu/pluralSightCourses/testFileReader.txt");
-                FileOutputStream out = new FileOutputStream("src/main/java/be/digitalcity/tu/pluralSightCourses/copyOfTestFileReader.txt")
+                FileInputStream in = new FileInputStream("src/main/java/be/digitalcity/tu/pluralSightCourses/PS_Exceptions/testFileReader.txt");
+                FileOutputStream out = new FileOutputStream("src/main/java/be/digitalcity/tu/pluralSightCourses/PS_Exceptions/copyOfTestFileReader.txt")
         ) {
             out.write(in.readAllBytes());
         } catch (FileNotFoundException e) {
@@ -91,7 +91,8 @@ public class PS_Exceptions {
         try {
             doThat(); //ne compile pas si je met pas dans try.catch
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            System.out.println("exception: "+e);
         }
 
 //        doThis(); //pas d'erreur de compilation mais erreur à l'execution
@@ -101,7 +102,8 @@ public class PS_Exceptions {
         try {
             int result = 5 / 0;
         }catch (ArithmeticException e){
-            e.printStackTrace();
+//            e.printStackTrace();
+            System.out.println("exception: "+e);
         }
 
         System.out.println("=============  ArrayIndexOutOfBoundsException ============");
@@ -110,7 +112,8 @@ public class PS_Exceptions {
             int[] arr = new int[1];
             System.out.println(arr[1]);
         }catch (ArrayIndexOutOfBoundsException e){
-            e.printStackTrace();
+//            e.printStackTrace();
+            System.out.println("exception: "+e);
         }
 
 
@@ -122,7 +125,8 @@ public class PS_Exceptions {
                 throw new IllegalArgumentException("message");
             }
         }catch (IllegalArgumentException e){
-            e.printStackTrace();
+//            e.printStackTrace();
+            System.out.println("exception: "+e);
         }
 
         System.out.println("=============  NullPointerException ============");
@@ -131,7 +135,8 @@ public class PS_Exceptions {
             String s1 = null;
             s1.toLowerCase();
         } catch (NullPointerException e){
-            e.printStackTrace();
+//            e.printStackTrace();
+            System.out.println("exception: "+e);
         }
 
 
@@ -141,11 +146,17 @@ public class PS_Exceptions {
         try {
             person.setAge(10);
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            System.out.println("exception: "+e);
         }
 
         System.out.println("========== throws unchecked exception =========");
-        person.setAge2(0);
+        try{
+
+            person.setAge2(0);
+        } catch (IllegalArgumentException e) {
+            System.out.println("exception: "+e);
+        }
 
         System.out.println("========== example in course ps ============");
 

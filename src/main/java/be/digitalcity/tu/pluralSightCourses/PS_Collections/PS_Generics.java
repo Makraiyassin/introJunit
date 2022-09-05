@@ -1,4 +1,4 @@
-package be.digitalcity.tu.pluralSightCourses;
+package be.digitalcity.tu.pluralSightCourses.PS_Collections;
 
 import java.util.Arrays;
 

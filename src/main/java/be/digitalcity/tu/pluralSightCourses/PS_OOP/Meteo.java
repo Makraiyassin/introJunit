@@ -6,9 +6,14 @@ public interface Meteo {
 
     int temp = 15;
 //    static void anonce (int x)
-    default void anonce (int x)
+    private void anonce2 (int x)
     {
         if(x>temp) System.out.println("la temperature est de " + x +" degres, Il fait chaud! :)");
             else System.out.println("la temperature est de " + x +" degres, Il fait froid! :(");
+    };
+
+    default void anonce (int x)
+    {
+       anonce2(x);
     };
 }

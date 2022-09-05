@@ -1,4 +1,4 @@
-package be.digitalcity.tu.pluralSightCourses;
+package be.digitalcity.tu.pluralSightCourses.PS_TypeAndString;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
