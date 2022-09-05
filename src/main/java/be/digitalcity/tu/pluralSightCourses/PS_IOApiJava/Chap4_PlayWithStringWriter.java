@@ -9,12 +9,15 @@ public class Chap4_PlayWithStringWriter {
 
         try (StringWriter writer = new StringWriter();) {
 
-            writer.write("Hello world!");
+            writer.write("Hello woooorld!!!");
 
             writer.flush();
 
             StringBuffer buffer = writer.getBuffer();
             String string = writer.toString();
+
+            System.out.println(string);
+
 
         } catch (IOException e) {
             e.printStackTrace();

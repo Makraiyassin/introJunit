@@ -23,6 +23,8 @@ public class Chap4_PayWithBufferedReader {
             e.printStackTrace();
         }
 
+        System.out.println("*************************************");
+
         try (BufferedReader bufferedReader = Files.newBufferedReader(path);) {
 
             Stream<String> lines = bufferedReader.lines();
