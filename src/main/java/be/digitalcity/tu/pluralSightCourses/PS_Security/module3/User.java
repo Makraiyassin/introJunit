@@ -8,6 +8,8 @@ import java.io.Serializable;
 
 @Entity(name="users")
 public class User implements Serializable {
+	private static final long serialVersionUID = -8742448897666522997L;
+
 	@Id
 	private String id;
 
@@ -19,6 +21,12 @@ public class User implements Serializable {
 	private String fullName;
 
 	private String photoFile;
+
+	private static final ObjectStreamField[] serialPersistentFields = {
+			new ObjectStreamField("email", String.class),
+			new ObjectStreamField("fullName", String.class),
+			new ObjectStreamField("photoFile", String.class),
+	};
 
 	User() {}
 

@@ -8,7 +8,10 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 
+
 public class Person  implements Cloneable, Serializable {
+
+	private static final long serialVersionUID = -8742448897666522997L;
 
 	private static final Pattern ALLOWLIST = Pattern.compile("([A-Za-z'\\-])*");
 	private final String name;
@@ -25,7 +28,7 @@ public class Person  implements Cloneable, Serializable {
 	}
 
 	public Person(){
-		this("default",15,Collections.emptyList());
+		this("default",15, Collections.emptyList());
 	}
 
 	public Person(String name, Integer age) {
@@ -76,7 +79,7 @@ public class Person  implements Cloneable, Serializable {
 		return new Person(name,age,shirts);
 	}
 
-	private Object readResolve()throws ObjectStreamException{
+	private Object readResolve()throws ObjectStreamException {
 		return new Person(this);
 	}
 

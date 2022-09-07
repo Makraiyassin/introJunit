@@ -38,13 +38,10 @@ class PersonTest {
 		Collection<String> shirts = new ArrayList<>();
 		shirts.add("blue");
 		shirts.add("green");
-
-		Person p1 = new Person("dave", 23, shirts);
-		Person p2 = p1.clone();
-		System.out.println(p1);
-		p1.addShirt("red");
-		System.out.println(p1);
-		System.out.println(p2);
+		Person p = new Person("dave", 23, shirts);
+		System.out.println(p);
+		shirts.add("red");
+		System.out.println(p);
 	}
 
 	@Test
@@ -68,11 +65,9 @@ class PersonTest {
 			oos.writeObject(a);
 		}
 		byte[] bytes = boas.toByteArray();
-		System.out.println(bytes[237]);
 		bytes[237] = 12; // sneaky ...
 		try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(bytes))) {
 			Person b = (Person) ois.readObject();
-//			Person b =  new Person("dave", 12);
 			System.out.println(a);
 			System.out.println(b);
 		}
