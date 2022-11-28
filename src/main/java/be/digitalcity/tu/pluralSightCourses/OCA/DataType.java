@@ -20,5 +20,15 @@ public class DataType {
         short short1 = (short) double0;
         short short2 = byte0;
 
+        byte t = 2;
+        test(t);
+
+    }
+
+    static void test(Byte a){
+        System.out.println("Integer");
+    }
+    static void test(short a){
+        System.out.println("short");
     }
 }

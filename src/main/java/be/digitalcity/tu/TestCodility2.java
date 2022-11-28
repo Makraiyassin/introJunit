@@ -16,7 +16,7 @@ public class TestCodility2 {
 
         for (int i = 0; i < n.length(); i++)
         {
-            arr[i] = n.charAt(i) - '0'; //or - 48
+            arr[i] = Integer.parseInt(String.valueOf(n.charAt(i)));//n.charAt(i) - '0'; //or - 48
             System.out.println("test1: "+n.charAt(i));
             System.out.println("test2: "+ (n.charAt(i)-'0'));
             System.out.println("test3: "+ (n.charAt(i)-48));
