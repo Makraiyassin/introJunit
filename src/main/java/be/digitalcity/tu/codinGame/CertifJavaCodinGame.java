@@ -77,11 +77,11 @@ public class CertifJavaCodinGame {
         System.out.println(dollars+" "+quarter+" "+dimes+" "+nickels+" "+pennies);
     }
 
-    public static void main4(String[] args) {
+    public static void main(String[] args) {
 
         /**
          * input:
-         *      1
+         *      2
          *      1 3   => A B
          *      10 12 => A B
          * output:
@@ -121,7 +121,7 @@ public class CertifJavaCodinGame {
         }
     }
 
-    public static void main(String[] args) {
-        System.out.println("Arza".matches("[A-Za-z1-9]+"));
+    public static void main5(String[] args) {
+        System.out.println("Arza1208".matches("[A-Za-z1-9]+"));
     }
 }
